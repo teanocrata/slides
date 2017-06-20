@@ -273,8 +273,502 @@
 
 <!--  Second phase-->
 
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap aligncenter">
+    <h1 class="text-landing">Let's go code!</h1>
+    <p class="text-intro">
+      <strong><a href="http://phaser.io/">Phaser</a></strong> &mdash; Desktop and Mobile HTML5 game framework <br>
+      A fast, free and fun open source framework for Canvas and WebGL prowered browser games
+    </p>
+    <nav>
+       <ul>
+         <li><a href="https://github.com/photonstorm/phaser-ce">Phaser Github</a></li>
+       </ul>
+     </nav>
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>Development environment</strong></h3>
+        <p class="text-intro">Launch a local server. </p>
+        <p>For development I used Browser Sync, a tool that will launch a server and automatically reload the browser when files are changed.</p>
+        <p>(Configured at package.json)</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>$ npm install</pre>
+        <pre>$ npm run dev</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3>Set up the project skeleton</h3>
+        <p>You can download it <a href="https://mozdevs.github.io/html5-games-workshop/assets/platformer/start.zip" title="Project skeleton">here</a></p>
+      </div>
+      <div class="column">
+        <a href="https://mozdevs.github.io/html5-games-workshop/assets/platformer/start.zip" title="Project skeleton"><img class="aligncenter" src="../static/images/skeleton.png" alt="Project skeleton"></a>
+      </div>
+      <div class="column">
+        <h3>And launch a local web server</h3>
+        <p>You can use package.json file from <a href="https://github.com/teanocrata/my-life-platformer-game" title="my-life-platformer-game">my repo</a></p>
+        <pre>$ npm run dev</pre>
+      </div>
+    </div>
+    <!-- end .grid-->
+  </div>
+  <!-- end .wrap-->
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3>HTML5 games needs a canvas</h3>
+        <pre>&lt;div id="game"&gt;</pre>
+      </div>
+      <div class="column">
+        <figure class="browser">
+          <img alt="Screenshot" src="https://mozdevs.github.io/html5-games-workshop/assets/platformer/step00_check.png">
+        </figure>
+      </div>
+      <div class="column">
+        <h3>where initialise Phaser</h3>
+        <pre>window.onload = function () {
+    let game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
+};</pre>
+      </div>
+    </div>
+    <!-- end .grid-->
+  </div>
+  <!-- end .wrap-->
+</section>
 
 
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <!-- alignment [class*="content-"] = container max-width:50% = 600px -->
+    <div class="content-center">
+      <h2><strong>The game loop</strong></h2>
+      <blockquote>
+        <p>In Phaser, the game loop is handled automatically via game states. A game state represents one "screen" in our game: the loading screen, the main menu, a level, etc. Each state is divided into phases or steps, the most important are:</p>
+        <ul class="flexblock features">
+          <li>Init</li>
+          <li>Preload</li>
+          <li>Create</li>
+          <li>Update</li>
+          <li>Render</li>
+          <li>Shutdown</li>
+        </ul>
+      </blockquote>
+    </div>
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>Create a game state</strong></h3>
+        <p class="text-intro">In main.js, add and start 'play' state</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState = {};
+
+window.onload = function () {
+    let game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
+    game.state.add('play', PlayState);
+    game.state.start('play');
+};</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <pre>PlayState.preload = function () {
+    this.game.load.image('background', 'images/background.png');
+};</pre>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <h3><strong>Loads and render an image</strong></h3>
+        <p class="text-intro">(Make sure your own images have same size and similar properties)</p>
+      </div>
+      <!-- .end .column -->
+
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>Render the image</strong></h3>
+        <p class="text-intro">We need an instance of Phaser.Image (a game entity), we can use game.add factory</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>// create game entities and set up world here
+PlayState.create = function () {
+    this.game.add.image(0, 0, 'background');
+};</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <pre>{
+    "platforms": [
+        {"image": "ground", "x": 0, "y": 546},
+        {"image": "grass:4x1", "x": 420, "y": 420}
+    ],
+    // ....
+}</pre>
+<pre>PlayState.preload = function () {
+    this.game.load.json('level:1', 'data/level01.json');
+    // ...
+};</pre>
+<pre>PlayState.create = function () {
+    //...
+    this._loadLevel(this.game.cache.getJSON('level:1'));
+};
+
+PlayState._loadLevel = function (data) {
+};</pre>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <h3><strong>Creating platforms</strong></h3>
+        <p class="text-intro">Platforms are sprites, at json files you can specify its properties.</p>
+        <p class="text-intro">In the preload, load the level data.</p>
+        <p class="text-intro">And modify the create</p>
+      </div>
+      <!-- .end .column -->
+
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>Spawn platform sprites</strong></h3>
+        <p class="text-intro">Before creatins the sprites, we need to load th images.</p>
+        <p class="text-intro">Then, spawn the platforms.</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState.preload = function () {
+    // ...
+    this.game.load.image('ground', 'images/ground.png');
+    this.game.load.image('grass:8x1', 'images/grass_8x1.png');
+    this.game.load.image('grass:6x1', 'images/grass_6x1.png');
+    this.game.load.image('grass:4x1', 'images/grass_4x1.png');
+    this.game.load.image('grass:2x1', 'images/grass_2x1.png');
+    this.game.load.image('grass:1x1', 'images/grass_1x1.png');
+};</pre>
+<pre>PlayState._loadLevel = function (data) {
+    // spawn all platforms
+    data.platforms.forEach(this._spawnPlatform, this);
+};
+
+PlayState._spawnPlatform = function (platform) {
+    this.game.add.sprite(platform.x, platform.y, platform.image);
+};</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <div class="wrap">
+    <figure class="browser">
+      <img alt="Screenshot" src="https://mozdevs.github.io/html5-games-workshop/assets/platformer/step02_check.png">
+    </figure>
+  </div>
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>The main character sprite</strong></h3>
+        <p class="text-intro">The heroine will be another sprite in our game. It has more business logic.</p>
+        <p>In preload, load the heroine image</p>
+        <p>Inherit from Phaser.Sprite</p>
+        <p>Spawn the hero when loading the level.</p>
+        <p>We will create a new method, _spawnCharacters, to spawn the hero and, later on, the enemies.</p>
+        <p>We will create a new method, _spawnCharacters, to spawn the hero and, later on, the enemies.</p>
+        <p>In Phaser, the point where we handle sprites and images is called anchor. Sets her anchor.</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState.preload = function () {
+    // ...
+    this.game.load.image('hero', 'images/hero_stopped.png');
+};</pre>
+<pre>function Hero(game, x, y) {
+    // call Phaser.Sprite constructor
+    Phaser.Sprite.call(this, game, x, y, 'hero');
+}
+
+// inherit from Phaser.Sprite
+Hero.prototype = Object.create(Phaser.Sprite.prototype);
+Hero.prototype.constructor = Hero;</pre>
+<pre>PlayState._loadLevel = function (data) {
+    //...
+    // spawn hero and enemies
+    this._spawnCharacters({hero: data.hero});
+};</pre>
+<pre>PlayState._spawnCharacters = function (data) {
+    // spawn hero
+    this.hero = new Hero(this.game, data.hero.x, data.hero.y);
+    this.game.add.existing(this.hero);</pre>
+    <pre>function Hero(game, x, y) {
+    // ...
+    this.anchor.set(0.5, 0.5);
+}</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <div class="wrap">
+    <figure class="browser">
+      <img alt="Screenshot" src="https://mozdevs.github.io/html5-games-workshop/assets/platformer/step03_check.png">
+    </figure>
+  </div>
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <h3><strong>Keyboard controls</strong></h3>
+        <p class="text-intro">Create instances of Phaser.Key</p>
+        <p class="text-intro">Add a move method to Hero</p>
+        <p class="text-intro">Call Hero.move when keys are being pressed</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState.init = function () {
+    this.keys = this.game.input.keyboard.addKeys({
+        left: Phaser.KeyCode.LEFT,
+        right: Phaser.KeyCode.RIGHT
+    });
+};</pre>
+<pre>Hero.prototype.move = function (direction) {
+    this.x += direction * 2.5; // 2.5 pixels each frame
+};</pre>
+<pre>PlayState.update = function () {
+    this._handleInput();
+};</pre>
+<pre>PlayState._handleInput = function () {
+    if (this.keys.left.isDown) { // move hero left
+        this.hero.move(-1);
+    }
+    else if (this.keys.right.isDown) { // move hero right
+        this.hero.move(1);
+    }
+};</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+      <div class="column">
+        <pre>function Hero(game, x, y) {
+    // ...
+    this.game.physics.enable(this);
+}</pre>
+<pre>Hero.prototype.move = function (direction) {
+    const SPEED = 200;
+    this.body.velocity.x = direction * SPEED;
+};</pre>
+<pre>PlayState._handleInput = function () {
+    if (this.keys.left.isDown) { // move hero left
+        // ...
+    }
+    else if (this.keys.right.isDown) { // move hero right
+        // ...
+    }
+    else { // stop
+        this.hero.move(0);
+    }
+};</pre>
+<pre>function Hero(game, x, y) {
+    // ...
+    this.body.collideWorldBounds = true;
+}</pre>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <h3><strong>Physics engine</strong></h3>
+        <p class="text-intro">Make the main character use the physics engine for movement.</p>
+        <p class="text-intro">Make the move method affect the body of the sprite instead of directly modifying its position.</p>
+        <p class="text-intro">Stop the main character</p>
+        <p class="text-intro">Prevent the main character to get out of the screen</p>
+      </div>
+      <!-- .end .column -->
+
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+
+      <div class="column">
+        <h3><strong>Gravity</strong></h3>
+        <p class="text-intro">Enable gravity in the world.</p>
+        <p class="text-intro">Make the character collide against the platforms.</p>
+        <p class="text-intro">Change _spawnPlatform so the sprite gets added to the group and we enable physics on it, to check for collisions</p>
+        <p class="text-intro">Perform collision checks between the main character and the platforms</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState._loadLevel = function (data) {
+    // ...
+
+    // enable gravity
+    const GRAVITY = 1200;
+    this.game.physics.arcade.gravity.y = GRAVITY;
+};</pre>
+      <pre>PlayState._loadLevel = function (data) {
+    // create all the groups/layers that we need
+    this.platforms = this.game.add.group();
+
+    // ...
+};</pre>
+      <pre>PlayState._spawnPlatform = function (platform) {
+    let sprite = this.platforms.create(
+        platform.x, platform.y, platform.image);
+
+    this.game.physics.enable(sprite);
+};</pre>
+      <pre>PlayState.update = function () {
+    this._handleCollisions();
+    this._handleInput();
+};
+
+PlayState._handleCollisions = function () {
+    this.game.physics.arcade.collide(this.hero, this.platforms);
+};</pre>
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+<section>
+  <div class="wrap">
+    <figure class="browser">
+      <img alt="Screenshot" src="https://mozdevs.github.io/html5-games-workshop/assets/platformer/platforms_falling.gif">
+    </figure>
+  </div>
+</section>
+
+<section>
+  <!--.wrap = container (width: 90%) -->
+  <div class="wrap">
+    <div class="grid vertical-align">
+
+      <div class="column">
+        <h3><strong>Fix collisions</strong></h3>
+        <p class="text-intro">Disable gravity for platforms</p>
+        <p class="text-intro">The platforms can't be moved when colliding</p>
+      </div>
+      <!-- .end .column -->
+      <div class="column">
+        <pre>PlayState._spawnPlatform = function (platform) {
+    // ...
+    sprite.body.allowGravity = false;
+};</pre>
+      <pre>PlayState._spawnPlatform = function (platform) {
+    // ...
+    sprite.body.immovable = true;
+};</pre>
+
+      </div>
+      <!-- .end .column -->
+    </div>
+    <!-- .end .grid -->
+  </div>
+  <!-- .end .wrap -->
+</section>
+
+
+<section>
+  <div class="wrap">
+    <figure class="browser">
+      <img alt="Screenshot" src="https://mozdevs.github.io/html5-games-workshop/assets/platformer/step06_check.png">
+    </figure>
+  </div>
+</section>
 
       </article>
     </main>
